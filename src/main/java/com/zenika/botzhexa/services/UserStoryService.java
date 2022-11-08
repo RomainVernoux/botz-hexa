@@ -41,7 +41,7 @@ public class UserStoryService {
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "No user story with id " + id));
         var oldStatus = userStory.getStatus();
         if (newStatus == TODO || newStatus == WIP && oldStatus != TODO || newStatus == DONE && oldStatus != WIP) {
-            throw new ResponseStatusException(BAD_REQUEST, "Cannot change state from " + oldStatus + " to " + newStatus);
+            throw new ResponseStatusException(BAD_REQUEST, "Cannot change state to " + newStatus);
         }
         userStory.setStatus(newStatus);
         userStoryRepository.save(userStory);
